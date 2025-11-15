@@ -31,11 +31,11 @@ const HeroSection = () => {
       </p>
       <div className="group">
         <button
-          className="flex items-center gap-1 px-6 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer group-hover:gap-3 group-hover:transition-all"
+          className="flex items-center gap-1 px-6 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer "
           onClick={() => navigate("/movies")}
         >
           Explore Movies
-          <ArrowRightIcon className="w-5 h-5 " />
+          <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-0.5 transition" />
         </button>
       </div>
     </div>
