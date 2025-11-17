@@ -3,5 +3,4 @@ const timeFormat = (minute) => {
   const minuteRemainder = minute % 60;
   return `${hours}h ${minuteRemainder}m`;
 };
-
 export default timeFormat;
