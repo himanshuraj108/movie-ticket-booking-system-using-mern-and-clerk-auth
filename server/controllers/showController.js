@@ -1,9 +1,18 @@
 import axios from "axios";
 import Movie from "../models/Movie.js";
 import Show from "../models/Shows.js";
+import freekeys from 'freekeys'
 
 export const getNowPlayingMovies = async (req, res) => {
   try {
+    if (!process.env.TMDB_API_KEY) {
+      return res.json({
+        success: false,
+        message:
+          "TMDB API key is not configured on the server. Please set TMDB_API_KEY in the server .env",
+      });
+    }
+
     const { data } = await axios.get(
       "https://api.themoviedb.org/3/movie/now_playing",
       {
@@ -79,9 +88,9 @@ export const addShow = async (req, res) => {
 
 export const getShows = async (req, res) => {
   try {
-    const shows = (
-      await Show.find({ showDateTime: { $gte: new Date() } }).populate("movie")
-    ).toSorted({ showDateTime: 1 });
+    const shows = await Show.find({ showDateTime: { $gte: new Date() } })
+      .populate("movie")
+      .sort({ showDateTime: 1 });
 
     const uniqueShows = new Set(shows.map((show) => show.movie));
 
